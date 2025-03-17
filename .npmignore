@@ -1,0 +1,36 @@
+.DS_Store
+
+.circleci
+.husky
+
+.editorconfig
+
+.eslintignore
+.eslintrc
+
+.github
+.gitattributes
+.gitignore
+
+# NPM
+.npmignore
+.npmrc
+
+# NVM
+.nvmrc
+
+# Deps
+.depsrc
+
+# Hooks
+.husky/hooks
+
+# Jest
+jest.config.*
+src/**/__tests__
+
+# Babel
+babel.config.*
+
+# ESLint
+eslint.config.*
