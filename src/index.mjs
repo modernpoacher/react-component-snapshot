@@ -47,8 +47,8 @@ export function getReactPropsKey (stateNode) {
 }
 
 /**
- * @param {Element | Text | React.Component<any, any, any>} stateNode
- * @returns {Record<PropertyKey, unknown> | null}
+ *  @param {Element | Text | React.Component<any, any, any>} stateNode
+ *  @returns {Record<PropertyKey, unknown> | null}
  */
 export function getStateNodeFiber (stateNode) {
   const key = getReactFiberKey(stateNode)
@@ -65,8 +65,8 @@ export function getStateNodeFiber (stateNode) {
 }
 
 /**
- * @param {React.Component<any, any, any> | Element | Text} stateNode
- * @returns {Record<PropertyKey, unknown> | null}
+ *  @param {React.Component<any, any, any> | Element | Text} stateNode
+ *  @returns {Record<PropertyKey, unknown> | null}
  */
 export function getStateNodeProps (stateNode) {
   const key = getReactPropsKey(stateNode)
@@ -80,6 +80,18 @@ export function getStateNodeProps (stateNode) {
   }
 
   return null
+}
+
+/**
+ *  @param {{ container: { firstElementChild: Element | null } }} component
+ *  @returns {Element | null}
+ */
+export function getComponentElement ({
+  container: {
+    firstElementChild: element
+  }
+}) {
+  return element
 }
 
 /**
@@ -220,8 +232,8 @@ function transform (fiberNode) {
 }
 
 /**
- * @param {Element | null | undefined} element
- * @returns {Record<PropertyKey, unknown> | null}
+ *  @param {Element | null | undefined} element
+ *  @returns {Record<PropertyKey, unknown> | null}
  */
 export default function snapshotOf (element) {
   if (element instanceof HTMLElement) {
