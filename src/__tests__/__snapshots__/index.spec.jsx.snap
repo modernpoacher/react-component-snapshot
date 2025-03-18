@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`#react-component-snapshot \`snapshotOf\` gets the snapshot 1`] = `
-<div
-  className="grand-parent"
->
-  <div
-    className="parent"
-  >
-    <div
-      className="child"
-    >
-      Text
-    </div>
-  </div>
-</div>
-`;
-
 exports[`#react-component-snapshot \`snapshotOf\` matches the snapshot 1`] = `
 <div
   className="1"
