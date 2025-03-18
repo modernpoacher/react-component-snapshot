@@ -3,7 +3,7 @@
     "module": "NodeNext",
     "target": "ESNext",
     "allowJs": true,
-    "checkJs": false,
+    "checkJs": true,
     "noEmit": true,
     "strict": true,
     "jsx": "react"

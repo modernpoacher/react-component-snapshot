@@ -1,3 +1,7 @@
+/**
+ *  @typedef {ReactComponentSnapshotTypes.FiberNode} FiberNode
+ */
+
 import {
   getType
 } from './react.mjs'
@@ -21,65 +25,85 @@ export function isReactPropsKey (key) {
 }
 
 /**
- *  @param {Element} element
+ *  @param {Element | Text | React.Component<any, any, any>} stateNode
  *  @returns {string | undefined}
  */
-export function getReactFiberKey (element) {
+export function getReactFiberKey (stateNode) {
   return (
-    Object.keys(element)
+    Object.keys(stateNode)
       .find(isReactFiberKey)
   )
 }
 
 /**
- *  @param {Element} element
+ *  @param {Element | Text | React.Component<any, any, any>} stateNode
  *  @returns {string | undefined}
  */
-export function getReactPropsKey (element) {
+export function getReactPropsKey (stateNode) {
   return (
-    Object.keys(element)
+    Object.keys(stateNode)
       .find(isReactPropsKey)
   )
 }
 
+/**
+ * @param {Element | Text | React.Component<any, any, any>} stateNode
+ * @returns {Record<PropertyKey, unknown> | null}
+ */
 export function getStateNodeFiber (stateNode) {
   const key = getReactFiberKey(stateNode)
 
-  const {
-    [key]: fiber
-  } = stateNode
+  if (key) {
+    const { // @ts-expect-error
+      [key]: fiber = null
+    } = stateNode
 
-  return fiber
+    return fiber
+  }
+
+  return null
 }
 
+/**
+ * @param {React.Component<any, any, any> | Element | Text} stateNode
+ * @returns {Record<PropertyKey, unknown> | null}
+ */
 export function getStateNodeProps (stateNode) {
   const key = getReactPropsKey(stateNode)
 
-  const {
-    [key]: props
-  } = stateNode
+  if (key) {
+    const { // @ts-expect-error
+      [key]: props = null
+    } = stateNode
 
-  return props
+    return props
+  }
+
+  return null
 }
 
 /**
  *  @param {Element} element
- *  @returns {FiberNode | null | undefined}
+ *  @returns {FiberNode | null}
  */
 function getFiber (element) {
   const key = getReactFiberKey(element)
 
   if (key) {
     const { // @ts-expect-error
-      [key]: fiber
+      [key]: fiber = null
     } = element
 
     return fiber
   }
 
-  throw new Error('Fiber is not found')
+  return null
 }
 
+/**
+ *  @param {FiberNode} fiberNode
+ *  @returns {FiberNode[]}
+ */
 function getSiblings (fiberNode) {
   const siblings = []
 
@@ -92,6 +116,10 @@ function getSiblings (fiberNode) {
   return siblings
 }
 
+/**
+ *  @param {FiberNode} fiberNode
+ *  @returns {Record<PropertyKey, unknown>}
+ */
 function getProps (fiberNode) {
   const stateNode = fiberNode.stateNode
 
@@ -105,7 +133,7 @@ function getProps (fiberNode) {
       Object.fromEntries(
         Object.entries(props)
           .filter(([key]) => key !== 'children')
-          .filter(([key, value]) => {
+          .filter(([key, value]) => { // @ts-expect-error
             if ((value || false) instanceof Object && !Array.isArray(value)) return !('current' in value)
             return true
           })
@@ -116,6 +144,10 @@ function getProps (fiberNode) {
   return {}
 }
 
+/**
+ *  @param {FiberNode} fiberNode
+ *  @returns {Array<string | FiberNode>}
+ */
 function getChildren (fiberNode) {
   const child = fiberNode.child
 
@@ -151,6 +183,10 @@ function getChildren (fiberNode) {
   return []
 }
 
+/**
+ *  @param {FiberNode | string} child
+ *  @returns {string | Record<PropertyKey, unknown>}
+ */
 function toChildren (child) {
   if (typeof child === 'string') return child
 
@@ -159,6 +195,10 @@ function toChildren (child) {
   )
 }
 
+/**
+ *  @param {FiberNode} fiberNode
+ *  @returns {Record<PropertyKey, unknown>}
+ */
 function transform (fiberNode) {
   const type = getType(fiberNode)
   const props = getProps(fiberNode)
@@ -179,13 +219,19 @@ function transform (fiberNode) {
   )
 }
 
-export default function toSnapshot (element) {
+/**
+ * @param {Element | null | undefined} element
+ * @returns {Record<PropertyKey, unknown> | null}
+ */
+export default function snapshotOf (element) {
   if (element instanceof HTMLElement) {
     const fiberNode = getFiber(element)
 
-    return (
-      transform(fiberNode)
-    )
+    if (fiberNode) {
+      return (
+        transform(fiberNode)
+      )
+    }
   }
 
   return null

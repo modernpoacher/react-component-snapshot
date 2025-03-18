@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#react-component-snapshot \`snapshotOf\` gets the snapshot 1`] = `
+<div
+  className="grand-parent"
+>
+  <div
+    className="parent"
+  >
+    <div
+      className="child"
+    >
+      Text
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`snapshotOf\` matches the snapshot 1`] = `
+<div
+  className="1"
+>
+  <div
+    className="2"
+  >
+    <div
+      className="3"
+    >
+      TEXT
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`snapshotOf\` matches the snapshot 2`] = `
+<div
+  className="1"
+>
+  TEXT (1)
+  <div
+    className="2"
+  >
+    TEXT (2)
+    <div
+      className="3"
+    >
+      TEXT (3)
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`snapshotOf\` matches the snapshot 3`] = `
+<div
+  className="1"
+>
+  TEXT (1)
+  <div
+    className="2"
+  >
+    TEXT (2)
+    <div
+      className="3"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+    <div
+      className="3"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+  </div>
+  TEXT (1)
+</div>
+`;
+
+exports[`#react-component-snapshot \`snapshotOf\` matches the snapshot 4`] = `
+<div
+  className="1"
+>
+  <div
+    className="2"
+  >
+    <div
+      className="3"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+  </div>
+  TEXT (1)
+</div>
+`;

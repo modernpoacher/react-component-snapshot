@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import debug from 'debug'
 
 const log = debug('react-component-snapshot')

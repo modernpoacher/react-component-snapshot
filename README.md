@@ -3,16 +3,16 @@
 Transform a React component to match its snapshot in Jest
 
 ```javascript
-import toSnapshot from 'react-component-snapshot'
+import snapshotOf from 'react-component-snapshot'
 
 const {
   container: {
-    firstElementChild
+    firstElementChild: element
   }
 } = render(
   <Component />
 )
 
-expect(toSnapshot(element))
+expect(snapshotOf(element))
   .toMatchSnapshot()
 ```
