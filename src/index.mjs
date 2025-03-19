@@ -11,6 +11,14 @@ import {
 } from './symbols.mjs'
 
 /**
+ *  @param {unknown} v
+ *  @returns {v is object}
+ */
+function isObject (v) {
+  return (v || false) instanceof Object && !Array.isArray(v)
+}
+
+/**
  *  @param {PropertyKey} key
  *  @returns {boolean}
  */
@@ -24,14 +32,6 @@ export function isReactFiberKey (key) {
  */
 export function isReactPropsKey (key) {
   return String(key).startsWith('__reactProps$')
-}
-
-/**
- *  @param {unknown} v
- *  @returns {v is object}
- */
-function isObject (v) {
-  return (v || false) instanceof Object && !Array.isArray(v)
 }
 
 /**
