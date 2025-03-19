@@ -34,3 +34,7 @@ babel.config.*
 
 # ESLint
 eslint.config.*
+
+# TypeScript
+jsconfig.json
+tsconfig.json
