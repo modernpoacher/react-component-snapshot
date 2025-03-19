@@ -1,4 +1,5 @@
 /**
+ *  @typedef {import('@testing-library/react').RenderResult} RenderType
  *  @typedef {ReactComponentSnapshotTypes.FiberNode} FiberNode
  */
 
@@ -93,12 +94,12 @@ export function getStateNodeProps (stateNode) {
 }
 
 /**
- *  @param {{ container: { firstElementChild: Element | null } }} component
+ *  @param {RenderType} render
  *  @returns {Element | null}
  */
 export function getComponentElement ({
   container: {
-    firstElementChild: element
+    firstElementChild: element = null
   }
 }) {
   return element
