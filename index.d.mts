@@ -12,9 +12,16 @@ declare global {
       | FiberNodeForInstrinsicElement
       | FiberNodeForTextNode
 
-    export interface FiberRootNode {
-      child: FiberNode
+    interface FiberType {
+      child: FiberNode | null
       sibling: FiberNode | null
+
+      tag: number
+      return?: FiberRootNode | FiberNode
+    }
+
+    export interface FiberRootNode extends FiberType {
+      child: FiberNode
 
       elementType: React.FunctionComponent
       type: React.FunctionComponent
@@ -22,51 +29,37 @@ declare global {
       stateNode: {
         current: FiberRootNode
       }
-      return?: FiberRootNode // | null
+      return?: FiberRootNode
     }
 
-    export interface FiberNodeForFunctionComponent {
-      child: FiberNode | null
-      sibling: FiberNode | null
-
+    export interface FiberNodeForFunctionComponent extends FiberType {
       elementType: React.FunctionComponent
       type: React.FunctionComponent
 
       stateNode: null
-      return?: FiberNode // | null
     }
 
-    export interface FiberNodeForClassComponent {
-      child: FiberNode | null
-      sibling: FiberNode | null
-
+    export interface FiberNodeForClassComponent extends FiberType {
       elementType: React.ComponentClass
       type: React.ComponentClass
 
       stateNode: React.Component
-      return?: FiberNode // | null
     }
 
-    export interface FiberNodeForInstrinsicElement {
-      child: FiberNode | null
-      sibling: FiberNode | null
-
+    export interface FiberNodeForInstrinsicElement extends FiberType {
       elementType: keyof React.JSX.IntrinsicElements
       type: keyof React.JSX.IntrinsicElements
 
       stateNode: HTMLElement
-      return?: FiberNode
     }
 
-    export interface FiberNodeForTextNode {
+    export interface FiberNodeForTextNode extends FiberType {
       child: null
-      sibling: FiberNode | null
 
       elementType: null
       type: null
 
       stateNode: Text
-      return?: FiberNode
     }
   }
 }

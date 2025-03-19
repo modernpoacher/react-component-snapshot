@@ -25,6 +25,14 @@ export function isReactPropsKey (key) {
 }
 
 /**
+ *  @param {unknown} v
+ *  @returns {v is object}
+ */
+function isObject (v) {
+  return (v || false) instanceof Object && !Array.isArray(v)
+}
+
+/**
  *  @param {Element | Text | React.Component<any, any, any>} stateNode
  *  @returns {string | undefined}
  */
@@ -145,8 +153,8 @@ function getProps (fiberNode) {
       Object.fromEntries(
         Object.entries(props)
           .filter(([key]) => key !== 'children')
-          .filter(([key, value]) => { // @ts-expect-error
-            if ((value || false) instanceof Object && !Array.isArray(value)) return !('current' in value)
+          .filter(([key, value]) => {
+            if (isObject(value)) return !('current' in value)
             return true
           })
       )
@@ -160,7 +168,7 @@ function getProps (fiberNode) {
  *  @param {FiberNode} fiberNode
  *  @returns {Array<string | FiberNode>}
  */
-function getChildren (fiberNode) {
+function getChildrenOf (fiberNode) {
   const child = fiberNode.child
 
   if (child) {
@@ -209,15 +217,23 @@ function toChildren (child) {
 
 /**
  *  @param {FiberNode} fiberNode
+ *  @returns {Array<string | Record<PropertyKey, unknown>>}
+ */
+function getChildren (fiberNode) {
+  return (
+    getChildrenOf(fiberNode)
+      .map(toChildren)
+  )
+}
+
+/**
+ *  @param {FiberNode} fiberNode
  *  @returns {Record<PropertyKey, unknown>}
  */
 function transform (fiberNode) {
   const type = getType(fiberNode)
   const props = getProps(fiberNode)
-  const children = (
-    getChildren(fiberNode)
-      .map(toChildren)
-  )
+  const children = getChildren(fiberNode)
 
   return (
     Object.defineProperty({

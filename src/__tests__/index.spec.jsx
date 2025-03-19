@@ -9,7 +9,9 @@ import {
   render
 } from '@testing-library/react'
 
-import snapshotOf from '#react-component-snapshot'
+import snapshotOf, {
+  getComponentElement
+} from '#react-component-snapshot'
 
 describe('#react-component-snapshot', () => {
   describe('`snapshotOf`', () => {
@@ -131,6 +133,22 @@ describe('#react-component-snapshot', () => {
 
       expect(snapshotOf(element))
         .toMatchSnapshot()
+    })
+  })
+
+  describe('`getComponentElement`', () => {
+    it('gets the element', () => {
+      class Component extends React.Component {
+        render () {
+          return (
+            <div />
+          )
+        }
+      }
+      expect(getComponentElement(render(
+        <Component />
+      )))
+        .toBeInstanceOf(HTMLDivElement)
     })
   })
 })
