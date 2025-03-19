@@ -11,5 +11,8 @@ export default {
     '^.+\\.jsx$': 'babel-jest',
     '^.+\\.mjs$': 'babel-jest'
   },
+  transformIgnorePatterns: [
+    '/node_modules\\/(?!react-component-name)\\/'
+  ],
   moduleFileExtensions: ['js', 'mjs', 'cjs', 'jsx']
 }

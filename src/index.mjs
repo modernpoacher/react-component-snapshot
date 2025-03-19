@@ -3,10 +3,12 @@
  */
 
 import {
-  getType
-} from './react.mjs'
+  getComponentNameFromFiber as getType
+} from 'react-component-name'
 
-const REACT_COMPONENT_SNAPSHOT = Symbol.for('react.test.json')
+import {
+  REACT_COMPONENT_SNAPSHOT
+} from './symbols.mjs'
 
 /**
  *  @param {PropertyKey} key

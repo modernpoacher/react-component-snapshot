@@ -26,10 +26,12 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
-    "debug": "^4.4.0"
+    "debug": "^4.4.0",
+    "react-component-name": "^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
@@ -42,7 +44,6 @@
     "@testing-library/react": "^16.2.0",
     "@types/debug": "^4.1.12",
     "@types/jest": "^29.5.14",
-    "@types/prop-types": "^15.7.14",
     "@types/react": "^19.0.11",
     "@typescript-eslint/parser": "^8.26.1",
     "core-js": "^3.41.0",
