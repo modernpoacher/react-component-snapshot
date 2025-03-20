@@ -5,7 +5,7 @@ export default {
   roots: [
     './src'
   ],
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(mjs?|jsx?)$',
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|mjs?)$',
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.jsx$': 'babel-jest',
