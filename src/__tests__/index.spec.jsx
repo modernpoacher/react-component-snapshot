@@ -10,7 +10,12 @@ import {
 } from '@testing-library/react'
 
 import snapshotOf, {
-  getComponentElement
+  getContainerElementFromRender,
+  getComponentElementFromRender,
+  getComponentElement,
+  toSnapshotFromContainerElement,
+  toSnapshotFromComponentElement,
+  toSnapshotFromRender
 } from '#react-component-snapshot'
 
 describe('#react-component-snapshot', () => {
@@ -252,6 +257,74 @@ describe('#react-component-snapshot', () => {
     })
   })
 
+  describe('`getContainerElementFromRender`', () => {
+    describe('The component is a function', () => {
+      it('gets the element', () => {
+        function Component () {
+          return (
+            <div />
+          )
+        }
+
+        expect(getContainerElementFromRender(render(
+          <Component />
+        )))
+          .toBeInstanceOf(HTMLDivElement)
+      })
+    })
+
+    describe('The component is a class', () => {
+      it('gets the element', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div />
+            )
+          }
+        }
+
+        expect(getContainerElementFromRender(render(
+          <Component />
+        )))
+          .toBeInstanceOf(HTMLDivElement)
+      })
+    })
+  })
+
+  describe('`getComponentElementFromRender`', () => {
+    describe('The component is a function', () => {
+      it('gets the element', () => {
+        function Component () {
+          return (
+            <div />
+          )
+        }
+
+        expect(getComponentElementFromRender(render(
+          <Component />
+        )))
+          .toBeInstanceOf(HTMLDivElement)
+      })
+    })
+
+    describe('The component is a class', () => {
+      it('gets the element', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div />
+            )
+          }
+        }
+
+        expect(getComponentElementFromRender(render(
+          <Component />
+        )))
+          .toBeInstanceOf(HTMLDivElement)
+      })
+    })
+  })
+
   describe('`getComponentElement`', () => {
     describe('The component is a function', () => {
       it('gets the element', () => {
@@ -282,6 +355,116 @@ describe('#react-component-snapshot', () => {
           <Component />
         )))
           .toBeInstanceOf(HTMLDivElement)
+      })
+    })
+  })
+
+  describe('`toSnapshotFromContainerElement`', () => {
+    describe('The component is a function', () => {
+      it('gets the element', () => {
+        function Component () {
+          return (
+            <div />
+          )
+        }
+
+        const containerElement = getContainerElementFromRender(render(
+          <Component />
+        ))
+
+        expect(toSnapshotFromContainerElement(containerElement))
+          .toMatchSnapshot()
+      })
+    })
+
+    describe('The component is a class', () => {
+      it('gets the element', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div />
+            )
+          }
+        }
+
+        const containerElement = getContainerElementFromRender(render(
+          <Component />
+        ))
+
+        expect(toSnapshotFromContainerElement(containerElement))
+          .toMatchSnapshot()
+      })
+    })
+  })
+
+  describe('`toSnapshotFromComponentElement`', () => {
+    describe('The component is a function', () => {
+      it('gets the element', () => {
+        function Component () {
+          return (
+            <div />
+          )
+        }
+
+        const componentElement = getComponentElementFromRender(render(
+          <Component />
+        ))
+
+        expect(toSnapshotFromComponentElement(componentElement))
+          .toMatchSnapshot()
+      })
+    })
+
+    describe('The component is a class', () => {
+      it('gets the element', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div />
+            )
+          }
+        }
+
+        const componentElement = getComponentElementFromRender(render(
+          <Component />
+        ))
+
+        expect(toSnapshotFromComponentElement(componentElement))
+          .toMatchSnapshot()
+      })
+    })
+  })
+
+  describe('`toSnapshotFromRender`', () => {
+    describe('The component is a function', () => {
+      it('gets the element', () => {
+        function Component () {
+          return (
+            <div />
+          )
+        }
+
+        expect(toSnapshotFromRender(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+    })
+
+    describe('The component is a class', () => {
+      it('gets the element', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div />
+            )
+          }
+        }
+
+        expect(toSnapshotFromRender(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
       })
     })
   })

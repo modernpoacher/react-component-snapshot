@@ -99,10 +99,100 @@ export function getStateNodeProps (stateNode) {
  */
 export function getComponentElement ({
   container: {
-    firstElementChild: element = null
+    firstElementChild: componentElement = null
   }
 }) {
-  return element
+  return componentElement
+}
+
+/**
+ *  @param {RenderType} render
+ *  @returns {Element | null}
+ */
+export function getComponentElementFromRender (render) {
+  return (
+    getComponentElementFromContainerElement(
+      getContainerElementFromRender(render)
+    )
+  )
+}
+
+/**
+ *  @param {RenderType} render
+ *  @returns {Element}
+ */
+export function getContainerElementFromRender ({
+  container: containerElement
+}) {
+  return containerElement
+}
+
+/**
+ *  @param {Element} containerElement
+ *  @returns {Element | null}
+ */
+function getComponentElementFromContainerElement ({
+  firstElementChild: componentElement = null
+}) {
+  return componentElement
+}
+
+/**
+ *  @param {RenderType} render
+ *  @returns {Record<PropertyKey, unknown> | null}
+ */
+export function toSnapshotFromRender (render) {
+  const element = getComponentElementFromRender(render)
+
+  if (element instanceof HTMLElement) {
+    const fiberNode = getFiber(element)
+
+    if (fiberNode) {
+      return (
+        transform(fiberNode)
+      )
+    }
+  }
+
+  return null
+}
+
+/**
+ *  @param {Element} containerElement
+ *  @returns {Record<PropertyKey, unknown> | null}
+ */
+export function toSnapshotFromContainerElement (containerElement) {
+  const element = getComponentElementFromContainerElement(containerElement)
+
+  if (element instanceof HTMLElement) {
+    const fiberNode = getFiber(element)
+
+    if (fiberNode) {
+      return (
+        transform(fiberNode)
+      )
+    }
+  }
+
+  return null
+}
+
+/**
+ *  @param {Element | null} componentElement
+ *  @returns {Record<PropertyKey, unknown> | null}
+ */
+export function toSnapshotFromComponentElement (componentElement) {
+  if (componentElement instanceof HTMLElement) {
+    const fiberNode = getFiber(componentElement)
+
+    if (fiberNode) {
+      return (
+        transform(fiberNode)
+      )
+    }
+  }
+
+  return null
 }
 
 /**
