@@ -2,13 +2,13 @@
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a class matches the snapshot 1`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   <div
-    className="2"
+    className="parent"
   >
     <div
-      className="3"
+      className="child"
     >
       TEXT
     </div>
@@ -18,15 +18,15 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a class match
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a class matches the snapshot 2`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   TEXT (1)
   <div
-    className="2"
+    className="parent"
   >
     TEXT (2)
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
@@ -36,21 +36,21 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a class match
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a class matches the snapshot 3`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   TEXT (1)
   <div
-    className="2"
+    className="parent"
   >
     TEXT (2)
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
     TEXT (2)
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
@@ -62,13 +62,13 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a class match
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a class matches the snapshot 4`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   <div
-    className="2"
+    className="parent"
   >
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
@@ -80,13 +80,13 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a class match
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a function matches the snapshot 1`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   <div
-    className="2"
+    className="parent"
   >
     <div
-      className="3"
+      className="child"
     >
       TEXT
     </div>
@@ -96,15 +96,15 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a function ma
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a function matches the snapshot 2`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   TEXT (1)
   <div
-    className="2"
+    className="parent"
   >
     TEXT (2)
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
@@ -114,21 +114,21 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a function ma
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a function matches the snapshot 3`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   TEXT (1)
   <div
-    className="2"
+    className="parent"
   >
     TEXT (2)
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
     TEXT (2)
     <div
-      className="3"
+      className="child"
     >
       TEXT (3)
     </div>
@@ -140,13 +140,169 @@ exports[`#react-component-snapshot \`snapshotOf\` The component is a function ma
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a function matches the snapshot 4`] = `
 <div
-  className="1"
+  className="grand-parent"
 >
   <div
-    className="2"
+    className="parent"
   >
     <div
-      className="3"
+      className="child"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+  </div>
+  TEXT (1)
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a class matches the snapshot 1`] = `
+<div
+  className="grand-parent"
+>
+  <div
+    className="parent"
+  >
+    <div
+      className="child"
+    >
+      TEXT
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a class matches the snapshot 2`] = `
+<div
+  className="grand-parent"
+>
+  TEXT (1)
+  <div
+    className="parent"
+  >
+    TEXT (2)
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a class matches the snapshot 3`] = `
+<div
+  className="grand-parent"
+>
+  TEXT (1)
+  <div
+    className="parent"
+  >
+    TEXT (2)
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+  </div>
+  TEXT (1)
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a class matches the snapshot 4`] = `
+<div
+  className="grand-parent"
+>
+  <div
+    className="parent"
+  >
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+  </div>
+  TEXT (1)
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a function matches the snapshot 1`] = `
+<div
+  className="grand-parent"
+>
+  <div
+    className="parent"
+  >
+    <div
+      className="child"
+    >
+      TEXT
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a function matches the snapshot 2`] = `
+<div
+  className="grand-parent"
+>
+  TEXT (1)
+  <div
+    className="parent"
+  >
+    TEXT (2)
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+  </div>
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a function matches the snapshot 3`] = `
+<div
+  className="grand-parent"
+>
+  TEXT (1)
+  <div
+    className="parent"
+  >
+    TEXT (2)
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+    <div
+      className="child"
+    >
+      TEXT (3)
+    </div>
+    TEXT (2)
+  </div>
+  TEXT (1)
+</div>
+`;
+
+exports[`#react-component-snapshot \`toSnapshot\` The component is a function matches the snapshot 4`] = `
+<div
+  className="grand-parent"
+>
+  <div
+    className="parent"
+  >
+    <div
+      className="child"
     >
       TEXT (3)
     </div>
@@ -163,7 +319,3 @@ exports[`#react-component-snapshot \`toSnapshotFromComponentElement\` The compon
 exports[`#react-component-snapshot \`toSnapshotFromContainerElement\` The component is a class gets the element 1`] = `<div />`;
 
 exports[`#react-component-snapshot \`toSnapshotFromContainerElement\` The component is a function gets the element 1`] = `<div />`;
-
-exports[`#react-component-snapshot \`toSnapshotFromRender\` The component is a class gets the element 1`] = `<div />`;
-
-exports[`#react-component-snapshot \`toSnapshotFromRender\` The component is a function gets the element 1`] = `<div />`;

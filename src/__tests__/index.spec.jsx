@@ -9,24 +9,215 @@ import {
   render
 } from '@testing-library/react'
 
-import snapshotOf, {
+import {
+  toSnapshot,
+  snapshotOf,
   getContainerElementFromRender,
   getComponentElementFromRender,
   getComponentElement,
   toSnapshotFromContainerElement,
-  toSnapshotFromComponentElement,
-  toSnapshotFromRender
+  toSnapshotFromComponentElement
 } from '#react-component-snapshot'
 
 describe('#react-component-snapshot', () => {
+  describe('`toSnapshot`', () => {
+    describe('The component is a function', () => {
+      it('matches the snapshot', () => {
+        function Component () {
+          return (
+            <div className='grand-parent'>
+              <div className='parent'>
+                <div className='child'>
+                  TEXT
+                </div>
+              </div>
+            </div>
+          )
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+
+      it('matches the snapshot', () => {
+        function Component () {
+          return (
+            <div className='grand-parent'>
+              TEXT (1)
+              <div className='parent'>
+                TEXT (2)
+                <div className='child'>
+                  TEXT (3)
+                </div>
+              </div>
+            </div>
+          )
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+
+      it('matches the snapshot', () => {
+        function Component () {
+          return (
+            <div className='grand-parent'>
+              TEXT (1)
+              <div className='parent'>
+                TEXT (2)
+                <div className='child'>
+                  TEXT (3)
+                </div>
+                TEXT (2)
+                <div className='child'>
+                  TEXT (3)
+                </div>
+                TEXT (2)
+              </div>
+              TEXT (1)
+            </div>
+          )
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+
+      it('matches the snapshot', () => {
+        function Component () {
+          return (
+            <div className='grand-parent'>
+              <div className='parent'>
+                <div className='child'>
+                  TEXT (3)
+                </div>
+                TEXT (2)
+              </div>
+              TEXT (1)
+            </div>
+          )
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+    })
+
+    describe('The component is a class', () => {
+      it('matches the snapshot', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div className='grand-parent'>
+                <div className='parent'>
+                  <div className='child'>
+                    TEXT
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+
+      it('matches the snapshot', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div className='grand-parent'>
+                TEXT (1)
+                <div className='parent'>
+                  TEXT (2)
+                  <div className='child'>
+                    TEXT (3)
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+
+      it('matches the snapshot', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div className='grand-parent'>
+                TEXT (1)
+                <div className='parent'>
+                  TEXT (2)
+                  <div className='child'>
+                    TEXT (3)
+                  </div>
+                  TEXT (2)
+                  <div className='child'>
+                    TEXT (3)
+                  </div>
+                  TEXT (2)
+                </div>
+                TEXT (1)
+              </div>
+            )
+          }
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+
+      it('matches the snapshot', () => {
+        class Component extends React.Component {
+          render () {
+            return (
+              <div className='grand-parent'>
+                <div className='parent'>
+                  <div className='child'>
+                    TEXT (3)
+                  </div>
+                  TEXT (2)
+                </div>
+                TEXT (1)
+              </div>
+            )
+          }
+        }
+
+        expect(toSnapshot(render(
+          <Component />
+        )))
+          .toMatchSnapshot()
+      })
+    })
+  })
+
   describe('`snapshotOf`', () => {
     describe('The component is a function', () => {
       it('matches the snapshot', () => {
         function Component () {
           return (
-            <div className='1'>
-              <div className='2'>
-                <div className='3'>
+            <div className='grand-parent'>
+              <div className='parent'>
+                <div className='child'>
                   TEXT
                 </div>
               </div>
@@ -49,11 +240,11 @@ describe('#react-component-snapshot', () => {
       it('matches the snapshot', () => {
         function Component () {
           return (
-            <div className='1'>
+            <div className='grand-parent'>
               TEXT (1)
-              <div className='2'>
+              <div className='parent'>
                 TEXT (2)
-                <div className='3'>
+                <div className='child'>
                   TEXT (3)
                 </div>
               </div>
@@ -76,15 +267,15 @@ describe('#react-component-snapshot', () => {
       it('matches the snapshot', () => {
         function Component () {
           return (
-            <div className='1'>
+            <div className='grand-parent'>
               TEXT (1)
-              <div className='2'>
+              <div className='parent'>
                 TEXT (2)
-                <div className='3'>
+                <div className='child'>
                   TEXT (3)
                 </div>
                 TEXT (2)
-                <div className='3'>
+                <div className='child'>
                   TEXT (3)
                 </div>
                 TEXT (2)
@@ -109,9 +300,9 @@ describe('#react-component-snapshot', () => {
       it('matches the snapshot', () => {
         function Component () {
           return (
-            <div className='1'>
-              <div className='2'>
-                <div className='3'>
+            <div className='grand-parent'>
+              <div className='parent'>
+                <div className='child'>
                   TEXT (3)
                 </div>
                 TEXT (2)
@@ -139,9 +330,9 @@ describe('#react-component-snapshot', () => {
         class Component extends React.Component {
           render () {
             return (
-              <div className='1'>
-                <div className='2'>
-                  <div className='3'>
+              <div className='grand-parent'>
+                <div className='parent'>
+                  <div className='child'>
                     TEXT
                   </div>
                 </div>
@@ -166,11 +357,11 @@ describe('#react-component-snapshot', () => {
         class Component extends React.Component {
           render () {
             return (
-              <div className='1'>
+              <div className='grand-parent'>
                 TEXT (1)
-                <div className='2'>
+                <div className='parent'>
                   TEXT (2)
-                  <div className='3'>
+                  <div className='child'>
                     TEXT (3)
                   </div>
                 </div>
@@ -195,15 +386,15 @@ describe('#react-component-snapshot', () => {
         class Component extends React.Component {
           render () {
             return (
-              <div className='1'>
+              <div className='grand-parent'>
                 TEXT (1)
-                <div className='2'>
+                <div className='parent'>
                   TEXT (2)
-                  <div className='3'>
+                  <div className='child'>
                     TEXT (3)
                   </div>
                   TEXT (2)
-                  <div className='3'>
+                  <div className='child'>
                     TEXT (3)
                   </div>
                   TEXT (2)
@@ -230,9 +421,9 @@ describe('#react-component-snapshot', () => {
         class Component extends React.Component {
           render () {
             return (
-              <div className='1'>
-                <div className='2'>
-                  <div className='3'>
+              <div className='grand-parent'>
+                <div className='parent'>
+                  <div className='child'>
                     TEXT (3)
                   </div>
                   TEXT (2)
@@ -430,40 +621,6 @@ describe('#react-component-snapshot', () => {
         ))
 
         expect(toSnapshotFromComponentElement(componentElement))
-          .toMatchSnapshot()
-      })
-    })
-  })
-
-  describe('`toSnapshotFromRender`', () => {
-    describe('The component is a function', () => {
-      it('gets the element', () => {
-        function Component () {
-          return (
-            <div />
-          )
-        }
-
-        expect(toSnapshotFromRender(render(
-          <Component />
-        )))
-          .toMatchSnapshot()
-      })
-    })
-
-    describe('The component is a class', () => {
-      it('gets the element', () => {
-        class Component extends React.Component {
-          render () {
-            return (
-              <div />
-            )
-          }
-        }
-
-        expect(toSnapshotFromRender(render(
-          <Component />
-        )))
           .toMatchSnapshot()
       })
     })
