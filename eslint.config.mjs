@@ -161,8 +161,11 @@ export default [
       },
       globals: {
         ...globals.browser,
-        ReactComponentInstanceTypes: 'readonly'
+        ReactComponentSnapshotTypes: 'readonly'
       }
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   })
 ]
