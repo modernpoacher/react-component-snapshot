@@ -8,7 +8,8 @@ import {
 } from 'react-component-name'
 
 import {
-  REACT_COMPONENT_SNAPSHOT
+  REACT_COMPONENT_FORWARD_REF_TYPE,
+  REACT_COMPONENT_SNAPSHOT_TYPE
 } from './symbols.mjs'
 
 /**
@@ -16,7 +17,7 @@ import {
  *  @returns {v is object}
  */
 function isObject (v) {
-  return (v || false) instanceof Object && !Array.isArray(v)
+  return typeof (v || false) === 'object' && !Array.isArray(v)
 }
 
 /**
@@ -144,8 +145,14 @@ function getProps (fiberNode) {
       Object.fromEntries(
         Object.entries(props)
           .filter(([key]) => key !== 'children')
-          .filter(([key, value]) => {
-            if (isObject(value)) return !('current' in value)
+          .filter(([key]) => key !== 'ref')
+          .filter(([key, value]) => { // key is not `ref` but value may be a `ref`
+            if (isObject(value)) {
+              return !(
+                value.$$typeof !== REACT_COMPONENT_FORWARD_REF_TYPE /* forward ref */ ||
+                'current' in value /* ref shape */
+              )
+            }
             return true
           })
       )
@@ -233,7 +240,7 @@ export default function getSnapshot (fiberNode) {
       children
     },
     '$$typeof', {
-      value: REACT_COMPONENT_SNAPSHOT
+      value: REACT_COMPONENT_SNAPSHOT_TYPE
     })
   )
 }
