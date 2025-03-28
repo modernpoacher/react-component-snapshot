@@ -128,6 +128,34 @@ function getSiblings (fiberNode) {
   return siblings
 }
 
+function getEntryKey ([key]) {
+  return key
+}
+
+function getEntryValue ([key, value]) {
+  return value
+}
+
+function entryKeyIsNotChildren (entry) {
+  return getEntryKey(entry) !== 'children'
+}
+
+function entryKeyIsNotRef (entry) {
+  return getEntryKey(entry) !== 'ref'
+}
+
+function entryValueIsNotRef (entry) {
+  const value = getEntryValue(entry)
+
+  if (isObject(value)) {
+    return !(
+      value.$$typeof !== REACT_COMPONENT_FORWARD_REF_TYPE /* forward ref */ ||
+      'current' in value /* ref shape */
+    )
+  }
+  return true
+}
+
 /**
  *  @param {FiberNode} fiberNode
  *  @returns {Record<PropertyKey, unknown>}
@@ -144,22 +172,28 @@ function getProps (fiberNode) {
     return (
       Object.fromEntries(
         Object.entries(props)
-          .filter(([key]) => key !== 'children')
-          .filter(([key]) => key !== 'ref')
-          .filter(([key, value]) => { // key is not `ref` but value may be a `ref`
-            if (isObject(value)) {
-              return !(
-                value.$$typeof !== REACT_COMPONENT_FORWARD_REF_TYPE /* forward ref */ ||
-                'current' in value /* ref shape */
-              )
-            }
-            return true
-          })
+          .filter(entryKeyIsNotChildren)
+          .filter(entryKeyIsNotRef) // key is not `ref`
+          .filter(entryValueIsNotRef) // ... but value may be a `ref`
       )
     )
   }
 
   return {}
+}
+
+/**
+ *  @param {FiberNode} fiberNode
+ *  @returns {string | FiberNode}
+ */
+function mapChildren (fiberNode) {
+  const stateNode = fiberNode.stateNode
+
+  if (stateNode instanceof Text) {
+    return stateNode.data
+  }
+
+  return fiberNode
 }
 
 /**
@@ -172,15 +206,10 @@ function getChildrenOf (fiberNode) {
   if (child) {
     const siblings = getSiblings(child)
 
-    return [child].concat(siblings).map((child) => {
-      const stateNode = child.stateNode
-
-      if (stateNode instanceof Text) {
-        return stateNode.data
-      }
-
-      return child
-    })
+    return (
+      [child].concat(siblings)
+        .map(mapChildren)
+    )
   }
 
   const stateNode = fiberNode.stateNode
