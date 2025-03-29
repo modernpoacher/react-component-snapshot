@@ -128,31 +128,52 @@ function getSiblings (fiberNode) {
   return siblings
 }
 
+/**
+ * @param {[key: PropertyKey, value: unknown]} entry
+ * @returns {PropertyKey}
+ */
 function getEntryKey ([key]) {
   return key
 }
 
+/**
+ * @param {[key: PropertyKey, value: unknown]} entry
+ * @returns {unknown}
+ */
 function getEntryValue ([key, value]) {
   return value
 }
 
+/**
+ * @param {[key: PropertyKey, value: unknown]} entry
+ * @returns {boolean}
+ */
 function entryKeyIsNotChildren (entry) {
   return getEntryKey(entry) !== 'children'
 }
 
+/**
+ * @param {[key: PropertyKey, value: unknown]} entry
+ * @returns {boolean}
+ */
 function entryKeyIsNotRef (entry) {
   return getEntryKey(entry) !== 'ref'
 }
 
+/**
+ * @param {[key: PropertyKey, value: unknown]} entry
+ * @returns {boolean}
+ */
 function entryValueIsNotRef (entry) {
   const value = getEntryValue(entry)
 
   if (isObject(value)) {
-    return !(
-      value.$$typeof !== REACT_COMPONENT_FORWARD_REF_TYPE /* forward ref */ ||
+    return !( // @ts-expect-error
+      value.$$typeof === REACT_COMPONENT_FORWARD_REF_TYPE /* forward ref */ ||
       'current' in value /* ref shape */
     )
   }
+
   return true
 }
 
@@ -186,7 +207,7 @@ function getProps (fiberNode) {
  *  @param {FiberNode} fiberNode
  *  @returns {string | FiberNode}
  */
-function mapChildren (fiberNode) {
+function toChildrenOf (fiberNode) {
   const stateNode = fiberNode.stateNode
 
   if (stateNode instanceof Text) {
@@ -208,7 +229,7 @@ function getChildrenOf (fiberNode) {
 
     return (
       [child].concat(siblings)
-        .map(mapChildren)
+        .map(toChildrenOf)
     )
   }
 

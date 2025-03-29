@@ -2,6 +2,8 @@ import type {
   RenderResult as RenderType
 } from '@testing-library/react'
 
+import '#react-component-snapshot/fiber'
+
 export function getComponentElement (render: RenderType): Element | null
 
 export function getComponentElementFromRender (render: RenderType): Element | null

@@ -6,7 +6,16 @@
     "checkJs": true,
     "noEmit": true,
     "strict": true,
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "#react-component-snapshot": [
+        "src/index.mjs"
+      ],
+      "#react-component-snapshot/fiber": [
+        "src/fiber/index.mjs"
+      ]
+    }
   },
   "include": [
     "."
