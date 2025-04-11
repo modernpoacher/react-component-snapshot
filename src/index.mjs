@@ -56,19 +56,11 @@ function getComponentElementFromContainerElement ({
  *  @returns {Record<PropertyKey, unknown> | null}
  */
 export function toSnapshotFromRender (render) {
-  const element = getComponentElementFromRender(render)
-
-  if (element instanceof HTMLElement) {
-    const fiberNode = getFiber(element)
-
-    if (fiberNode) {
-      return (
-        getSnapshot(fiberNode)
-      )
-    }
-  }
-
-  return null
+  return (
+    toSnapshotFromComponentElement(
+      getComponentElementFromRender(render)
+    )
+  )
 }
 
 /**
@@ -76,19 +68,11 @@ export function toSnapshotFromRender (render) {
  *  @returns {Record<PropertyKey, unknown> | null}
  */
 export function toSnapshotFromContainerElement (containerElement) {
-  const element = getComponentElementFromContainerElement(containerElement)
-
-  if (element instanceof HTMLElement) {
-    const fiberNode = getFiber(element)
-
-    if (fiberNode) {
-      return (
-        getSnapshot(fiberNode)
-      )
-    }
-  }
-
-  return null
+  return (
+    toSnapshotFromComponentElement(
+      getComponentElementFromContainerElement(containerElement)
+    )
+  )
 }
 
 /**
