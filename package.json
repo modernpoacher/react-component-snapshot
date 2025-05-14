@@ -30,7 +30,7 @@
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
-    "debug": "^4.4.0",
+    "debug": "^4.4.1",
     "react-component-name": "^0.0.36"
   },
   "devDependencies": {
