@@ -6,11 +6,11 @@ declare global {
      *  https://github.com/bendtherules/react-fiber-traverse
      */
 
-    export type FiberNode =
-      | FiberNodeForClassComponent
-      | FiberNodeForFunctionComponent
-      | FiberNodeForInstrinsicElement
-      | FiberNodeForTextNode
+    export type FiberNode = |
+      FiberNodeForClassComponent |
+      FiberNodeForFunctionComponent |
+      FiberNodeForInstrinsicElement |
+      FiberNodeForTextNode
 
     interface FiberType {
       child: FiberNode | null
