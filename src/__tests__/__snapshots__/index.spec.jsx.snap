@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`#react-component-snapshot \`snapshotOf\` The component is a class matches the snapshot 1`] = `
 <div
