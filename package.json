@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "debug": "^4.4.1",
-    "react-component-name": "^0.0.81"
+    "react-component-name": "^0.0.82"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
@@ -39,7 +39,7 @@
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "@sequencemedia/eslint-config-standard": "^0.2.82",
-    "@sequencemedia/eslint-config-typescript": "^0.1.140",
+    "@sequencemedia/eslint-config-typescript": "^0.1.141",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@types/debug": "^4.1.12",
