@@ -30,7 +30,7 @@
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
-    "debug": "^4.4.1",
+    "debug": "^4.4.3",
     "react-component-name": "^0.0.83"
   },
   "devDependencies": {
@@ -38,15 +38,15 @@
     "@babel/eslint-parser": "^7.28.4",
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
-    "@sequencemedia/eslint-config-standard": "^0.2.82",
-    "@sequencemedia/eslint-config-typescript": "^0.1.141",
+    "@sequencemedia/eslint-config-standard": "^0.2.83",
+    "@sequencemedia/eslint-config-typescript": "^0.1.142",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@types/debug": "^4.1.12",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
-    "@typescript-eslint/parser": "^8.43.0",
+    "@typescript-eslint/parser": "^8.44.0",
     "core-js": "^3.45.1",
     "eslint": "^9.35.0",
     "eslint-plugin-react": "^7.37.5",
