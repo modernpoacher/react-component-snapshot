@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "debug": "^4.4.3",
-    "react-component-name": "^0.0.88"
+    "react-component-name": "^0.0.89"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
