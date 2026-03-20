@@ -42,7 +42,7 @@
     "@sequencemedia/eslint-config-typescript": "^0.1.182",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@types/debug": "^4.1.12",
+    "@types/debug": "^4.1.13",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
