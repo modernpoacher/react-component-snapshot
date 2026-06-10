@@ -9,10 +9,10 @@
     "jsx": "react",
     "paths": {
       "#react-component-snapshot": [
-        "src/index.mjs"
+        "./src/index.mjs"
       ],
       "#react-component-snapshot/fiber": [
-        "src/fiber/index.mjs"
+        "./src/fiber/index.mjs"
       ]
     }
   },
