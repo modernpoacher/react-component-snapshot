@@ -1,6 +1,6 @@
 {
   "name": "react-component-snapshot",
-  "version": "0.0.214",
+  "version": "0.0.215",
   "description": "Transform a React component to match its snapshot in Jest",
   "keywords": [
     "react",
