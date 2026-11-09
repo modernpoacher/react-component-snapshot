@@ -1,9 +1,12 @@
+/**
+ * @typedef {import('eslint').Linter.RulesRecord} RulesRecord
+ */
+
 import globals from 'globals'
 import standard from '@sequencemedia/eslint-config-standard/configs/recommended/merge'
 import typescript from '@sequencemedia/eslint-config-typescript/configs/recommended/merge'
-import babelParser from '@babel/eslint-parser'
 import typescriptParser from '@typescript-eslint/parser'
-import reactPlugin from 'eslint-plugin-react'
+import reactPlugin from '@eslint-react/eslint-plugin'
 
 const reactParserOptions = {
   ecmaFeatures: {
@@ -11,10 +14,9 @@ const reactParserOptions = {
   }
 }
 
-const reactPlugins = {
-  react: reactPlugin
-}
-
+/**
+ * @type {RulesRecord}
+ */
 const reactRules = {
   'no-unused-vars': [
     'error',
@@ -22,28 +24,25 @@ const reactRules = {
       varsIgnorePattern: 'React'
     }
   ],
-  quotes: [
+  '@stylistic/quotes': [
     'error',
     'single'
   ],
-  'jsx-quotes': [
+  '@stylistic/jsx-quotes': [
     'error',
     'prefer-single'
   ],
-  'react/jsx-indent': [
+  '@stylistic/indent': [
     'error',
     2,
     {
-      checkAttributes: true,
-      indentLogicalExpressions: true
+      SwitchCase: 1,
+      ignoredNodes: [
+        'TemplateLiteral *'
+      ],
+      offsetTernaryExpressions: true
     }
   ]
-}
-
-const reactSettings = {
-  react: {
-    version: 'detect'
-  }
 }
 
 export default [
@@ -51,10 +50,10 @@ export default [
    *  React config for all `jsx` files
    */
   {
-    ...reactPlugin.configs.flat.recommended,
-    settings: {
-      ...reactSettings
-    }
+    ...reactPlugin.configs.recommended,
+    files: [
+      '**/*.jsx'
+    ]
   },
   /**
    *  Standard config
@@ -99,23 +98,15 @@ export default [
       'src/**/__tests__/**/*.jsx'
     ],
     languageOptions: {
-      parser: babelParser,
       parserOptions: {
-        ...reactParserOptions,
-        project: null
+        ...reactParserOptions
       },
       globals: {
         ...globals.browser
       }
     },
-    plugins: {
-      ...reactPlugins
-    }, // @ts-expect-error Storybook
     rules: {
       ...reactRules
-    },
-    settings: {
-      ...reactSettings
     }
   }),
   /**
@@ -126,24 +117,16 @@ export default [
       'src/**/__tests__/**/*.jsx'
     ],
     languageOptions: {
-      parser: babelParser,
       parserOptions: {
-        ...reactParserOptions,
-        project: null
+        ...reactParserOptions
       },
       globals: {
         ...globals.browser,
         ...globals.jest
       }
     },
-    plugins: {
-      ...reactPlugins
-    }, // @ts-expect-error Storybook
     rules: {
       ...reactRules
-    },
-    settings: {
-      ...reactSettings
     }
   }),
   /**
