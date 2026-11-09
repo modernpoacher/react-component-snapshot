@@ -30,8 +30,8 @@
     "test": "NODE_ENV=test jest"
   },
   "allowScripts": {
-    "core-js@3.51.0": true,
-    "@parcel/watcher": true
+    "@parcel/watcher": true,
+    "core-js@3.51.0": true
   },
   "dependencies": {
     "debug": "^4.4.3",
